@@ -91,6 +91,5 @@ public abstract class Utilizador
         sb.append("Data de Nascimento: ").append(dataDeNascimento).append("\n");
         return sb.toString();
     }
-    
-   public abstract Utilizador clone();
+   
 }

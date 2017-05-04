@@ -70,5 +70,4 @@ public abstract class Viatura
             return sb.toString();
         }
         
-        public abstract Viatura clone();
 }
