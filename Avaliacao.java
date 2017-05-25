@@ -21,6 +21,10 @@ public class Avaliacao {
         this.avaliacao = avaliacao;
     }
     
+    public Avaliacao clone(){
+        return new Avaliacao(this);
+    }
+    
     public boolean equals(Object o){
        if(this == o)
             return true;
