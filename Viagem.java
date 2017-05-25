@@ -1,21 +1,16 @@
-
-/**
- * Escreva a descrição da classe Viagem aqui.
- * 
- * @author (seu nome) 
- * @version (número de versão ou data)
- */
 public class Viagem
 {
-    private Posicao p;
+    private Posicao pcliente;//cliente
+    private Posicao ptaxi;// taxi
     private double distancia;
     private double tempoDeChegada;
     private double duracao;
-    private double distanciaDoCliente;
+    private double distanciaDoCliente; 
     private double custo;
 
-public Viagem(Posicao P, double distancia, double tempoDeChegada, double duracao, double distanciaDoCliente, double custo){
-    this.p= p.clone();
+public Viagem(Posicao pcliente, Posicao ptaxi, double distancia, double tempoDeChegada, double duracao, double distanciaDoCliente, double custo){
+    this.pcliente= pcliente.clone();
+    this.ptaxi = ptaxi.clone();
     this.distancia = distancia;
     this.tempoDeChegada = tempoDeChegada;
     this.duracao = duracao;
@@ -26,12 +21,13 @@ public Viagem(Posicao P, double distancia, double tempoDeChegada, double duracao
 }
 
 public Viagem(){
-    this(new Posicao(),0,0,0,0,0);
+    this(new Posicao(),new Posicao(),0,0,0,0,0);
 }
 
 public Viagem(Viagem u){
     
-    this.p=u.getP();
+    this.pcliente=u.getPcliente();
+    this.ptaxi=u.getPtaxi();
     this.distancia=u.getDistancia();
     this.tempoDeChegada=u.getTempoDeChegada();
     this.duracao=u.getDuracao();
@@ -40,13 +36,16 @@ public Viagem(Viagem u){
     
 }
 
-public Posicao getP(){
-    return p;
+public Posicao getPcliente(){
+    return pcliente;
+}
+
+public Posicao getPtaxi(){
+    return ptaxi;
 }
 
 public double getDistancia(){
-    return distancia;
-    
+    return distancia; 
 }
 
 public double getTempoDeChegada() {
@@ -65,8 +64,12 @@ public double getCusto(){
     return custo;
 }
 
-public void setP(Posicao p){
-    this.p = p;
+public void setPcliente(Posicao p){
+    this.pcliente = p;
+}
+
+public void setPtaxi(Posicao p){
+    this.ptaxi = p;
 }
 
 public void setDistancia(double distancia){
@@ -82,24 +85,22 @@ public void setDuracao(double duracao){
 }
 
 public void setDistanciaDoCliente(double distanciaDoCliente){
-    
-   this.distanciaDoCliente = distanciaDoCliente;
+    this.distanciaDoCliente = distanciaDoCliente;
 }
 
 public void setCusto(double custo){
     this.custo = custo;
-
 }
 
  public boolean equals(Object o){
-            if(this == o)
-                return true;
-            if ((o==null) || (this.getClass() != o.getClass()))
-                return false;
-            Viagem m = (Viagem) o;
-                return (this.p.equals(m.getP()) && this.distancia==(m.getDistancia()) && 
-               this.tempoDeChegada==(m.getTempoDeChegada())  && this.duracao==(m.getDuracao()) 
-               && this.distanciaDoCliente==(m.getDistanciaDoCliente()) && this.custo==(m.getCusto()));
+     if(this == o)
+        return true;
+     if ((o==null) || (this.getClass() != o.getClass()))
+        return false;
+     Viagem m = (Viagem) o;
+     return (this.pcliente.equals(m.getPcliente()) && this.ptaxi.equals(m.getPtaxi()) && this.distancia==(m.getDistancia()) && 
+             this.tempoDeChegada==(m.getTempoDeChegada())  && this.duracao==(m.getDuracao()) 
+             && this.distanciaDoCliente==(m.getDistanciaDoCliente()) && this.custo==(m.getCusto()));
         }
 
 public Viagem clone(){
