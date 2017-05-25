@@ -1,6 +1,22 @@
 #BlueJ class context
 comment0.params=
 comment0.target=Cliente()
-comment1.params=viagens\ p
-comment1.target=Cliente(java.util.ArrayList,\ Posicao)
-numComments=2
+comment1.params=viagens\ p\ email\ nome\ password\ morada\ dataDeNascimento
+comment1.target=Cliente(java.util.ArrayList,\ Posicao,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String)
+comment2.params=c
+comment2.target=Cliente(Cliente)
+comment3.params=
+comment3.target=Posicao\ getPosicao()
+comment4.params=
+comment4.target=java.util.ArrayList\ getViagens()
+comment5.params=p
+comment5.target=void\ setPosicao(Posicao)
+comment6.params=viagens
+comment6.target=void\ setViagens(java.util.ArrayList)
+comment7.params=o
+comment7.target=boolean\ equals(java.lang.Object)
+comment8.params=
+comment8.target=java.lang.String\ toString()
+comment9.params=
+comment9.target=Cliente\ clone()
+numComments=10

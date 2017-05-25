@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.Random;
 
 /**
  * Escreva a descrição da classe Motorista aqui.
@@ -11,15 +12,15 @@ import java.util.stream.Collectors;
  */
 public class Motorista extends Utilizador
 {
-    private double factor;
+    private Random factor;
     private List<Avaliacao> classf;
     private List<Viagem> viagens;
     private double kms;
     private boolean disponivel;
     
-    public Motorista(String email, String nome, String password, String morada, String dataDeNascimento, double factor, List<Avaliacao> classf, ArrayList<Viagem> viagens, double kms, boolean disponivel){
+    public Motorista(String email, String nome, String password, String morada, String dataDeNascimento, Random factor, List<Avaliacao> classf, ArrayList<Viagem> viagens, double kms, boolean disponivel){
         super(email,nome,password,morada,dataDeNascimento);
-        this.factor = factor;
+        this.factor = new Random();
         this.setClassf(classf);
         this.setViagens(viagens);
         this.kms = kms;
@@ -28,7 +29,7 @@ public class Motorista extends Utilizador
     
     public Motorista(){
         super();
-        factor = 0;
+        factor = new Random();
         
     }
     
@@ -40,8 +41,12 @@ public class Motorista extends Utilizador
         this.disponivel = u.getDisponivel();
     }
     
-    public double getFactor(){
+    public Random getFactor(){
         return factor;
+    }
+    
+    public float getFactorFloat(){
+        return factor.nextFloat();
     }
     
     public ArrayList<Avaliacao> getClassf(){
@@ -64,11 +69,11 @@ public class Motorista extends Utilizador
         return disponivel;
     }
     
-    public void setFactor(double factor){
+    public void setFactor(Random factor){
         this.factor = factor;
     }
     
-    public void setClassf( List<Avaliacao> classf){
+    public void setClassf(List<Avaliacao> classf){
         this.classf = classf.stream()
                       .map(Avaliacao::clone)
                       .collect(Collectors.toList());
