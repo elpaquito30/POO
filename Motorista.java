@@ -9,7 +9,7 @@ import java.util.List;
 public class Motorista extends Utilizador
 {
     private double factor;
-    private double classf;
+    private List<Avaliacao> classf;
     private List<Viagem> viagens;
     private double kms;
     private boolean disponivel;
