@@ -71,7 +71,7 @@ public abstract class Viatura
                 return (this.velocidade==(m.getVelocidade()) && 
                this.custo==(m.getCusto()) && 
                this.p.equals(m.getP()) &&
-               this.m.equals(m.getM()));
+               this.m.equals(m.getMotorista()));
         }
         
         public String toString() {

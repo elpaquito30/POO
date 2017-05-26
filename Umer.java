@@ -1,12 +1,18 @@
-
+import java.util.TreeMap;
 
 public class Umer{
-    
-private Map<String,Utilizador> utilizadores;
-private Map<String,Viatura> taxis;
+   
+private TreeMap<String,Utilizador> utilizadores;
+private TreeMap<String,Viatura> taxis;
 private Utilizador userlogin;
 
-    
+public Umer(){
+    this.utilizadores = new TreeMap<String,Utilizador>();
+    this.taxis = new TreeMap<String, Viatura>();
+    this.userlogin = null;
+}
+
+
 public boolean adicionaUti(Utilizador u){
     
     

@@ -9,7 +9,8 @@ public class Viagem
     private double duracao;
     private double distanciaDoCliente; 
     private double custo;
-    private LocalDate data;
+    private LocalDate datai;
+    private LocalDate dataf;
 
 public Viagem(Cliente cli, Motorista mot, double distancia, double tempoDeChegada, double duracao, double distanciaDoCliente, double custo){
     this.cli= cli.clone();
@@ -19,8 +20,8 @@ public Viagem(Cliente cli, Motorista mot, double distancia, double tempoDeChegad
     this.duracao = duracao;
     this.distanciaDoCliente = distanciaDoCliente;
     this.custo = custo;
-    
-    
+    this.datai = LocalDate.now();
+    this.dataf = null;
 }
 
 public Viagem(){
