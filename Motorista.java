@@ -50,7 +50,7 @@ public class Motorista extends Utilizador
     
     public ArrayList<Avaliacao> getClassf(){
        return this.classf.stream()
-                          .map(Avaliacao::clone)
+      .map(Avaliacao::clone)
                           .collect(Collectors.toCollection(ArrayList::new));
     }
     
