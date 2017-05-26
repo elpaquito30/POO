@@ -1,4 +1,7 @@
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.Random;
 /**
  * Classe abstrata Utilizador - escreva a descrição da classe aqui
  * 
@@ -8,17 +11,21 @@
 public abstract class Utilizador
 {
   private String email, nome, password, morada, dataDeNascimento;
-   
+  private List<Viagem> viagens;
+  
    public Utilizador(String email, String nome, String password, String morada, String dataDeNascimento){
         this.email = email;
         this.nome = nome;
         this.password = password;
         this.morada = morada;
         this.dataDeNascimento = dataDeNascimento;
+        this.setViagens(viagens);
     }
     
    public Utilizador(){
        this("","","","","");
+     
+       
    }
    
    public Utilizador(Utilizador u){
@@ -27,6 +34,7 @@ public abstract class Utilizador
        this.password = u.getPassword();
        this.morada = u.getMorada();
        this.dataDeNascimento = u.getDataDeNascimento();
+       this.viagens = u.getViagens();
    }
    
    public String getEmail(){
@@ -49,6 +57,13 @@ public abstract class Utilizador
       return dataDeNascimento;
     }
     
+   public ArrayList<Viagem> getViagens(){
+        return this.viagens.stream()
+                          .map(Viagem::clone)
+                          .collect(Collectors.toCollection(ArrayList::new));
+    }
+    
+    
    public void setEmail(String email){
       this.email = email;
     }
@@ -69,6 +84,12 @@ public abstract class Utilizador
       this.dataDeNascimento = dataDeNascimento;
     }
     
+   public void setViagens(List<Viagem> viagens){
+       this.viagens = viagens.stream()
+                      .map(Viagem::clone)
+                      .collect(Collectors.toList());
+    }
+    
    public boolean equals(Object o){
        if(this == o)
             return true;
@@ -79,6 +100,7 @@ public abstract class Utilizador
                this.nome.equals(m.getNome()) && 
                this.password.equals(m.getPassword())&& 
                this.morada.equals(m.getMorada()) && 
+               this.viagens.equals(m.getViagens()) &&
                this.dataDeNascimento.equals(m.getDataDeNascimento()));
    }
    

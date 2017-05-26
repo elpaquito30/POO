@@ -12,18 +12,14 @@ import java.util.List;
 public class Cliente extends Utilizador
 {
     private Posicao p;
-    private List<Viagem> viagens;
     
   public Cliente(){
     super();
-    this.viagens = new ArrayList<Viagem>();
     this.p = new Posicao();
   }
   
-  public Cliente(ArrayList<Viagem> viagens, Posicao p, String email, String nome, String password, String morada, String dataDeNascimento){
+  public Cliente(Posicao p, String email, String nome, String password, String morada, String dataDeNascimento){
     super(email, nome, password, morada, dataDeNascimento);
-    this.viagens = new ArrayList<Viagem>();
-    for (Viagem v : viagens) this.viagens.add(v.clone());
     this.p = p.clone();
     
   }

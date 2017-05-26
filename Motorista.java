@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.*;
 import java.util.stream.Collectors;
 import java.util.Random;
 
@@ -14,29 +13,29 @@ public class Motorista extends Utilizador
 {
     private Random factor;
     private List<Avaliacao> classf;
-    private List<Viagem> viagens;
     private double kms;
     private boolean disponivel;
     
-    public Motorista(String email, String nome, String password, String morada, String dataDeNascimento, Random factor, List<Avaliacao> classf, ArrayList<Viagem> viagens, double kms, boolean disponivel){
+    public Motorista(String email, String nome, String password, String morada, String dataDeNascimento, Random factor,double kms, boolean disponivel){
         super(email,nome,password,morada,dataDeNascimento);
         this.factor = new Random();
         this.setClassf(classf);
-        this.setViagens(viagens);
         this.kms = kms;
         this.disponivel = disponivel; 
     }
     
     public Motorista(){
         super();
+        this.kms = 0.0;
+        this.disponivel = false;
         factor = new Random();
+        
         
     }
     
     public Motorista(Motorista u){
         this.factor = u.getFactor();
         this.classf = u.getClassf();
-        this.viagens = u.getViagens();
         this.kms = u.getKms();
         this.disponivel = u.getDisponivel();
     }
@@ -55,12 +54,7 @@ public class Motorista extends Utilizador
                           .collect(Collectors.toCollection(ArrayList::new));
     }
     
-    public ArrayList<Viagem> getViagens(){
-        return this.viagens.stream()
-                          .map(Viagem::clone)
-                          .collect(Collectors.toCollection(ArrayList::new));
-    }
-    
+
     public double getKms(){
         return kms;
     }
@@ -78,12 +72,7 @@ public class Motorista extends Utilizador
                       .map(Avaliacao::clone)
                       .collect(Collectors.toList());
     }
-    
-    public void setViagens(List<Viagem> viagens){
-       this.viagens = viagens.stream()
-                      .map(Viagem::clone)
-                      .collect(Collectors.toList());
-    }
+   
     
     public void setKms(double kms){
         this.kms = kms;
@@ -101,7 +90,6 @@ public class Motorista extends Utilizador
        Motorista m = (Motorista) o;
        return (this.factor==(m.getFactor()) && 
                this.classf==(m.getClassf()) && 
-               this.viagens==(m.getViagens()) &&
                this.kms==(m.getKms()) &&
                this.disponivel==(m.getDisponivel()));
     }
