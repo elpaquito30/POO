@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Viagem
 {
     private Cliente cli;
@@ -7,11 +9,12 @@ public class Viagem
     private double duracao;
     private double distanciaDoCliente; 
     private double custo;
+    private LocalDate data;
 
 public Viagem(Cliente cli, Motorista mot, double distancia, double tempoDeChegada, double duracao, double distanciaDoCliente, double custo){
     this.cli= cli.clone();
     this.mot = mot.clone();
-    this.istancia = distancia;
+    this.distancia = distancia;
     this.tempoDeChegada = tempoDeChegada;
     this.duracao = duracao;
     this.distanciaDoCliente = distanciaDoCliente;
@@ -98,7 +101,7 @@ public void setCusto(double custo){
      if ((o==null) || (this.getClass() != o.getClass()))
         return false;
      Viagem m = (Viagem) o;
-     return (this.cli.equals(m.getCli()) && this.mot.equals(m.getMot()) && this.distancia==(m.getDistancia()) && 
+     return (this.cli.equals(m.getCliente()) && this.mot.equals(m.getMotorista()) && this.distancia==(m.getDistancia()) && 
              this.tempoDeChegada==(m.getTempoDeChegada())  && this.duracao==(m.getDuracao()) 
              && this.distanciaDoCliente==(m.getDistanciaDoCliente()) && this.custo==(m.getCusto()));
         }

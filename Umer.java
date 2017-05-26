@@ -1,33 +1,35 @@
 
-/**
- * Write a description of class Umer here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class Umer
-{
-    // instance variables - replace the example below with your own
-    private int x;
 
-    /**
-     * Constructor for objects of class Umer
-     */
-    public Umer()
-    {
-        // initialise instance variables
-        x = 0;
-    }
+public class Umer{
+    
+private Map<String,Utilizador> utilizadores;
+private Map<String,Viatura> taxis;
+private Utilizador userlogin;
 
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
-    }
+    
+public boolean adicionaUti(Utilizador u){
+    
+    
+}
+
+public boolean login(String email, String password){
+    
+    
+}
+
+public boolean insereViatura(Viatura v){
+    
+}
+
+public Viagem soliciViagem(Posicao i, Posicao f, Viatura v){
+    
+}
+
+public double classifMotorista(Utilizador u, double classi){
+    
+}
+
+
+    
+    
 }
