@@ -1,17 +1,17 @@
 public class Viagem
 {
-    private Posicao pcliente;//cliente
-    private Posicao ptaxi;// taxi
+    private Cliente cli;
+    private Motorista mot;
     private double distancia;
     private double tempoDeChegada;
     private double duracao;
     private double distanciaDoCliente; 
     private double custo;
 
-public Viagem(Posicao pcliente, Posicao ptaxi, double distancia, double tempoDeChegada, double duracao, double distanciaDoCliente, double custo){
-    this.pcliente= pcliente.clone();
-    this.ptaxi = ptaxi.clone();
-    this.distancia = distancia;
+public Viagem(Cliente cli, Motorista mot, double distancia, double tempoDeChegada, double duracao, double distanciaDoCliente, double custo){
+    this.cli= cli.clone();
+    this.mot = mot.clone();
+    this.istancia = distancia;
     this.tempoDeChegada = tempoDeChegada;
     this.duracao = duracao;
     this.distanciaDoCliente = distanciaDoCliente;
@@ -21,13 +21,13 @@ public Viagem(Posicao pcliente, Posicao ptaxi, double distancia, double tempoDeC
 }
 
 public Viagem(){
-    this(new Posicao(),new Posicao(),0,0,0,0,0);
+    this(new Cliente(),new Motorista(),0,0,0,0,0);
 }
 
 public Viagem(Viagem u){
     
-    this.pcliente=u.getPcliente();
-    this.ptaxi=u.getPtaxi();
+    this.cli=u.getCliente();
+    this.mot=u.getMotorista();
     this.distancia=u.getDistancia();
     this.tempoDeChegada=u.getTempoDeChegada();
     this.duracao=u.getDuracao();
@@ -36,12 +36,12 @@ public Viagem(Viagem u){
     
 }
 
-public Posicao getPcliente(){
-    return pcliente;
+public Cliente getCliente(){
+    return cli;
 }
 
-public Posicao getPtaxi(){
-    return ptaxi;
+public Motorista getMotorista(){
+    return mot;
 }
 
 public double getDistancia(){
@@ -64,12 +64,12 @@ public double getCusto(){
     return custo;
 }
 
-public void setPcliente(Posicao p){
-    this.pcliente = p;
+public void setCli(Cliente cli){
+    this.cli = cli;
 }
 
-public void setPtaxi(Posicao p){
-    this.ptaxi = p;
+public void setMot(Motorista mot){
+    this.mot = mot;
 }
 
 public void setDistancia(double distancia){
@@ -98,7 +98,7 @@ public void setCusto(double custo){
      if ((o==null) || (this.getClass() != o.getClass()))
         return false;
      Viagem m = (Viagem) o;
-     return (this.pcliente.equals(m.getPcliente()) && this.ptaxi.equals(m.getPtaxi()) && this.distancia==(m.getDistancia()) && 
+     return (this.cli.equals(m.getCli()) && this.mot.equals(m.getMot()) && this.distancia==(m.getDistancia()) && 
              this.tempoDeChegada==(m.getTempoDeChegada())  && this.duracao==(m.getDuracao()) 
              && this.distanciaDoCliente==(m.getDistanciaDoCliente()) && this.custo==(m.getCusto()));
         }

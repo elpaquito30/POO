@@ -25,35 +25,21 @@ public class Cliente extends Utilizador
     this.viagens = new ArrayList<Viagem>();
     for (Viagem v : viagens) this.viagens.add(v.clone());
     this.p = p.clone();
-    
   }
   
   public Cliente (Cliente c){
        super(c.getEmail(), c.getNome(), c.getPassword(), c.getMorada(), c.getDataDeNascimento());
        this.p = c.getPosicao();
        c.getViagens().forEach( v ->{this.viagens.add(v.clone());}); 
-    }
-  
+  }
   
   public Posicao getPosicao(){
       return p.clone();
-    }
-  
-  public ArrayList<Viagem> getViagens(){
-    ArrayList<Viagem> res = new ArrayList<Viagem>();
-    for (Viagem v : this.viagens) 
-       res.add(v.clone());
-    return res;
-    }
+  }
     
   public void setPosicao(Posicao p){
       this.p = p.clone();
-    }
-    
-  public void setViagens(ArrayList<Viagem> viagens){
-        for(Viagem v : viagens)
-        this.viagens.add(v.clone()); 
-    }
+  }
     
  public boolean equals(Object o) {
         if (this == o)
@@ -62,7 +48,7 @@ public class Cliente extends Utilizador
             return false;
         Cliente c = (Cliente) o;
         return super.equals(c);
-    }
+ }
  
  public String toString() {
     StringBuilder s = new StringBuilder();
@@ -71,7 +57,7 @@ public class Cliente extends Utilizador
     s.append ("Cliente: \n");   
     s.append(super.toString());
     return s.toString();
-    }
+ }
  
   public Cliente clone(){
       return new Cliente(this);
