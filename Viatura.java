@@ -9,6 +9,7 @@ public abstract class Viatura
 {
     private double velocidade;
     private double custo;
+    
     private Posicao p;
     private Motorista m;
     
