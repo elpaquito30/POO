@@ -5,10 +5,11 @@
  * @author (seu nome) 
  * @version (número de versão ou data)
  */
-public class Carro extends Viatura{
+
+public class Carro extends Viatura {
     
-public Carro(double velocidade, double custo, Posicao p){
-        super(velocidade,custo,p);
+public Carro(double velocidade, double custo, Posicao p, Motorista m, String matricula){
+        super(velocidade,custo,p,m,matricula);
 }
 
 public Carro(){
@@ -17,7 +18,7 @@ public Carro(){
 }
 
 public Carro(Carro u){
-    super(u.getVelocidade(),u.getCusto(),u.getP());
+    super(u.getVelocidade(),u.getCusto(),u.getP(),u.getMotorista(),u.getMatricula());
 }
 
 public Carro clone(){

@@ -7,8 +7,8 @@
  */
 public class Carrinha extends Viatura {
     
-public Carrinha(double velocidade, double custo, Posicao p){
-        super(velocidade,custo,p);
+public Carrinha(double velocidade, double custo, Posicao p, Motorista m, String matricula){
+        super(velocidade,custo,p,m,matricula);
 }
 
 public Carrinha(){
@@ -17,7 +17,7 @@ public Carrinha(){
 }
 
 public Carrinha(Carrinha u){
-    super(u.getVelocidade(),u.getCusto(),u.getP());
+    super(u.getVelocidade(),u.getCusto(),u.getP(),u.getMotorista(),u.getMatricula());
 }
 
 public Carrinha clone(){
