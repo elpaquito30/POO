@@ -1,3 +1,4 @@
+import  java.util.Random;
 
 /**
  * Classe abstrata Viatura - escreva a descrição da classe aqui
@@ -12,17 +13,19 @@ public abstract class Viatura
     private Posicao p;
     private Motorista m;
     private String matricula;
+    private double factor;
     
-        public Viatura(double velocidade, double custo, Posicao p, Motorista m, String matricula){
+        public Viatura(double velocidade, double custo, Posicao p, Motorista m, String matricula, double factor){
             this.velocidade = velocidade;
             this.custo = custo;
             this.p = p.clone();
             this.m = m.clone();
             this.matricula = matricula;
+            this.factor = factor;
         }
         
         public Viatura(){
-            this(0,0, new Posicao(), new Motorista(),"");
+            this(0,0, new Posicao(), new Motorista(),"", 0);
         }
         
         public Viatura(Viatura u){
@@ -31,6 +34,7 @@ public abstract class Viatura
             this.p = u.getP();
             this.m = u.getMotorista();
             this.matricula = u.getMatricula();
+            this.factor = u.getFactor();
             
         }
         
@@ -54,6 +58,17 @@ public abstract class Viatura
             return matricula;
         }
         
+        public double getFiabilidade(){
+            int min=0, max=1;
+            return this.getFactorRandomInRange(min, max);
+        }
+        
+        public double getFactorRandomInRange(int min, int max){
+            Random r = new Random();
+            setFactor(r.nextDouble((max-min) + 1) + min);
+            return this.factor;
+        }
+        
         public void setVelocidade(double velocidade){
             this.velocidade = velocidade;
         }
@@ -74,6 +89,10 @@ public abstract class Viatura
             this.matricula = matricula;
         }
         
+        public void setFactor(double factor){
+            this.factor = factor;
+        }
+        
         public boolean equals(Object o){
             if(this == o)
                 return true;
@@ -84,7 +103,8 @@ public abstract class Viatura
                this.custo==(m.getCusto()) && 
                this.p.equals(m.getP()) &&
                this.m.equals(m.getMotorista()) &&
-               this.matricula.equals(m.getMatricula()));
+               this.matricula.equals(m.getMatricula()) &&
+               this.factor==(m.getFactor()));
         }
         
         public String toString() {
@@ -93,7 +113,8 @@ public abstract class Viatura
             sb.append("Custo: ").append(custo).append("\n");
             sb.append("Posicao: ").append(p).append("\n");
             sb.append("Motorista: ").append(m).append("\n");
-            sb.append("Matricula; ").append(matricula).append("\n");
+            sb.append("Matricula: ").append(matricula).append("\n");
+            sb.append("Factor: ").append(factor).append("\n");
             return sb.toString();
         }
         
