@@ -25,13 +25,13 @@ public Viagem(Cliente cli, Viatura v, double distancia, double tempoDeChegada, d
 }
 
 public Viagem(){
-    this(new Cliente(),new Viatura(),0,0,0,0,0);
+    this(new Cliente(),null,0,0,0,0,0);
 }
 
 public Viagem(Viagem u){
     
     this.cli=u.getCliente();
-    this.v=v.getViatura();
+    this.v=u.getViatura();
     this.distancia=u.getDistancia();
     this.tempoDeChegada=u.getTempoDeChegada();
     this.duracao=u.getDuracao();
@@ -44,7 +44,7 @@ public Cliente getCliente(){
     return cli;
 }
 
-public Motorista getViatura(){
+public Viatura getViatura(){
     return v;
 }
 
@@ -72,7 +72,7 @@ public void setCli(Cliente cli){
     this.cli = cli;
 }
 
-public void setViagem(Viagem v){
+public void setViatura(Viatura v){
     this.v = v;
 }
 
@@ -97,7 +97,15 @@ public void setCusto(double custo){
 }
 
 public double calculaPreco(){
-    double tempoEstimado = this.distancia/
+    double tempoEstimado = this.distancia/this.v.getVelocidade();
+    double tempoReal = tempoEstimado * (this.v.getFactor());
+    double precoCombinado = (this.distancia + tempoEstimado) * this.v.getCusto();
+    double precoReal = (this.distancia + tempoReal) * this.v.getCusto();
+    if(tempoEstimado <= tempoReal * 1.25){
+            return precoReal;
+    }
+    else return precoCombinado;
+    
 }
 
 
@@ -107,7 +115,7 @@ public double calculaPreco(){
      if ((o==null) || (this.getClass() != o.getClass()))
         return false;
      Viagem m = (Viagem) o;
-     return (this.cli.equals(m.getCliente()) && this.mot.equals(m.getMotorista()) && this.distancia==(m.getDistancia()) && 
+     return (this.cli.equals(m.getCliente()) && this.v.equals(m.getViatura()) && this.distancia==(m.getDistancia()) && 
              this.tempoDeChegada==(m.getTempoDeChegada())  && this.duracao==(m.getDuracao()) 
              && this.distanciaDoCliente==(m.getDistanciaDoCliente()) && this.custo==(m.getCusto()));
         }

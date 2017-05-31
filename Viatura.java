@@ -74,6 +74,9 @@ public abstract class Viatura
             this.matricula = matricula;
         }
         
+        public abstract Viatura clone();
+        
+        
         public boolean equals(Object o){
             if(this == o)
                 return true;
