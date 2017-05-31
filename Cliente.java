@@ -25,10 +25,10 @@ public class Cliente extends Utilizador
   
   public Cliente (Cliente c){
        super(c.getEmail(), c.getNome(), c.getPassword(), c.getMorada(), c.getDataDeNascimento());
-       this.p = c.getPosicao();
+       this.p = c.getP();
  }
   
-  public Posicao getPosicao(){
+  public Posicao getP(){
       return p.clone();
   }
     

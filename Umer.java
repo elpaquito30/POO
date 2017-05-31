@@ -25,20 +25,33 @@ public void login(String email, String password) throws PassWordErradaException{
     
 
 public void insereViatura(Viatura v) throws ViaturaExistenteException{
-    if(this.taxi.containskey(v,getMatricula())) throw new ViaturaExistenteException("Viatura dada já existe");
+    if(this.taxis.containsKey(v.getMatricula())) throw new ViaturaExistenteException("Viatura dada já existe");
     this.taxis.put(v.getMatricula(),v);
     
 }
 
-public Viagem soliciViagem(Posicao i, Posicao f, Viatura v){
+//public Viagem soliciViagem(String matricula){   
     
-}
-
-public double classifMotorista(Utilizador u, double classi){
     
-}
 
 
-    
-    
+public Viatura viaturaProx(){
+    Cliente c = (Cliente) this.userLogin;
+    TreeMap<Double,Viatura> v = new TreeMap<Double,Viatura>();
+    this.taxis.values().stream().filter(t->t.getMotorista().getDisponivel()).forEach(t->{
+        v.put(c.getP().distancia(t.getP()),t);
+    });
+
+
+  return v.get(v.firstKey());
+
 }
+
+
+//public double classifMotorista(Utilizador u, double classi){
+}
+
+
+    
+    
+
