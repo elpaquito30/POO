@@ -11,14 +11,14 @@ import java.util.Random;
  */
 public class Motorista extends Utilizador
 {
-    private Random factor;
+    private double fiabilidade;
     private List<Avaliacao> classf;
     private double kms;
     private boolean disponivel;
     
-    public Motorista(String email, String nome, String password, String morada, String dataDeNascimento, Random factor,double kms, boolean disponivel){
+    public Motorista(String email, String nome, String password, String morada, String dataDeNascimento, double fiabilidade ,double kms, boolean disponivel){
         super(email,nome,password,morada,dataDeNascimento);
-        this.factor = new Random();
+        this.fiabilidade = fiabilidade;
         this.setClassf(classf);
         this.kms = kms;
         this.disponivel = disponivel; 
@@ -28,30 +28,26 @@ public class Motorista extends Utilizador
         super();
         this.kms = 0.0;
         this.disponivel = false;
-        factor = new Random();
+        this.fiabilidade = 0.0;
         
         
     }
     
     public Motorista(Motorista u){
-        this.factor = u.getFactor();
+        this.fiabilidade = u.getFiabilidade();
         this.classf = u.getClassf();
         this.kms = u.getKms();
         this.disponivel = u.getDisponivel();
     }
     
-    public Random getFactor(){
-        return factor;
+    public double getFiabilidade(){
+        return fiabilidade;
     }
-    
-    public float getFactorFloat(){
-        return factor.nextFloat();
-    }
-    
+        
     public ArrayList<Avaliacao> getClassf(){
        return this.classf.stream()
-      .map(Avaliacao::clone)
-                          .collect(Collectors.toCollection(ArrayList::new));
+       .map(c-> c.clone())
+       .collect(Collectors.toCollection(ArrayList::new));
     }
     
 
@@ -63,8 +59,8 @@ public class Motorista extends Utilizador
         return disponivel;
     }
     
-    public void setFactor(Random factor){
-        this.factor = factor;
+    public void setFiabilidade(double fiabilidade){
+        this.fiabilidade = fiabilidade;
     }
     
     public void setClassf(List<Avaliacao> classf){
@@ -88,7 +84,7 @@ public class Motorista extends Utilizador
        if ((o==null) || (this.getClass() != o.getClass()))
             return false;
        Motorista m = (Motorista) o;
-       return (this.factor==(m.getFactor()) && 
+       return (this.fiabilidade==(m.getFiabilidade()) && 
                this.classf==(m.getClassf()) && 
                this.kms==(m.getKms()) &&
                this.disponivel==(m.getDisponivel()));
