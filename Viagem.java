@@ -3,7 +3,7 @@ import java.time.LocalDate;
 public class Viagem
 {
     private Cliente cli;
-    private Motorista mot;
+    private Viatura v;
     private double distancia;
     private double tempoDeChegada;
     private double duracao;
@@ -12,9 +12,9 @@ public class Viagem
     private LocalDate datai;
     private LocalDate dataf;
 
-public Viagem(Cliente cli, Motorista mot, double distancia, double tempoDeChegada, double duracao, double distanciaDoCliente, double custo){
+public Viagem(Cliente cli, Viatura v, double distancia, double tempoDeChegada, double duracao, double distanciaDoCliente, double custo){
     this.cli= cli.clone();
-    this.mot = mot.clone();
+    this.v = v.clone();
     this.distancia = distancia;
     this.tempoDeChegada = tempoDeChegada;
     this.duracao = duracao;
@@ -25,13 +25,13 @@ public Viagem(Cliente cli, Motorista mot, double distancia, double tempoDeChegad
 }
 
 public Viagem(){
-    this(new Cliente(),new Motorista(),0,0,0,0,0);
+    this(new Cliente(),new Viatura(),0,0,0,0,0);
 }
 
 public Viagem(Viagem u){
     
     this.cli=u.getCliente();
-    this.mot=u.getMotorista();
+    this.v=v.getViatura();
     this.distancia=u.getDistancia();
     this.tempoDeChegada=u.getTempoDeChegada();
     this.duracao=u.getDuracao();
@@ -44,8 +44,8 @@ public Cliente getCliente(){
     return cli;
 }
 
-public Motorista getMotorista(){
-    return mot;
+public Motorista getViatura(){
+    return v;
 }
 
 public double getDistancia(){
@@ -72,8 +72,8 @@ public void setCli(Cliente cli){
     this.cli = cli;
 }
 
-public void setMot(Motorista mot){
-    this.mot = mot;
+public void setViagem(Viagem v){
+    this.v = v;
 }
 
 public void setDistancia(double distancia){
@@ -95,6 +95,11 @@ public void setDistanciaDoCliente(double distanciaDoCliente){
 public void setCusto(double custo){
     this.custo = custo;
 }
+
+public double calculaPreco(){
+    double tempoEstimado = this.distancia/
+}
+
 
  public boolean equals(Object o){
      if(this == o)

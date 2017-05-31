@@ -30,8 +30,15 @@ public void insereViatura(Viatura v) throws ViaturaExistenteException{
     
 }
 
-//public Viagem soliciViagem(String matricula){   
-    
+public Viagem soliciViagem(String matricula){   
+    if(this.taxis.containsKey(matricula)){
+        if(this.taxis.get(matricula).getMotorista().getDisponivel()){
+            Viagem v = new Viagem()
+        }
+    }
+
+
+    }
     
 
 
