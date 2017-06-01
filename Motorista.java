@@ -82,9 +82,9 @@ public class Motorista extends Utilizador
     public void calClass(){
 
         double c = 0;
-        this.classf.stream.mapToDouble(c->c.getAvaliacao()).sum();
+        this.classf.stream().mapToDouble(f->f.getAvaliacao()).sum();
         c=c/this.classf.size();
-        this.classificacao = r;
+        this.classificacao = c;
 
     }
     public boolean equals(Object o){

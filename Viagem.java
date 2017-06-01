@@ -13,7 +13,7 @@ public class Viagem
     private LocalDate dataf;
     private Posicao fim;
 
-public Viagem(Cliente cli, Viatura v, double tempoDeChegada, double distanciaDoCliente, double custo, Posicao fim){
+public Viagem(Cliente cli, Viatura v, double tempoDeChegada,double distancia, double distanciaDoCliente,Posicao fim){
     this.cli= cli.clone();
     this.v = v.clone();
     this.distancia = distancia;
@@ -39,7 +39,7 @@ public Viagem(Viagem u){
     this.duracao=u.getDuracao();
     this.distanciaDoCliente=u.getDistanciaDoCliente();
     this.custo=u.getCusto();
-    this.fim=u.getPosicao();
+    this.fim=u.getP();
     
 }
 

@@ -67,13 +67,13 @@ Viatura taxi = null;
         //vai ao map de taxis buscar a viatura com a matricula correspondente
             v = this.taxis.get(matricula);
             //Criar a viagem
-           novo = new Viagem(c, v , c.getP().distancia(fin), tempoDeChegada(v),c.getP().distancia(v.getP()));
+           novo = new Viagem(c, v , tempoDeChegada(v), c.getP().distancia(fin),c.getP().distancia(v.getP()), fin);
             
         }
 
     else{
         taxi = this.viaturaProx();
-        novo = new Viagem(c, v , c.getP().distancia(fin), tempoDeChegada(taxi), c.getP().distancia(v.getP()));
+        novo = new Viagem(c, taxi , c.getP().distancia(fin), tempoDeChegada(taxi), c.getP().distancia(v.getP()),fin);
             
     }
    
@@ -105,9 +105,9 @@ private Viatura viaturaProx(){
 
 
 //public double classifMotorista(Utilizador u, double classi){
+
 }
 
-
-    
+ 
     
 
