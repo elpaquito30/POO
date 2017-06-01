@@ -8,8 +8,8 @@
 
 public class Carro extends Viatura {
     
-public Carro(double velocidade, double custo, Posicao p, Motorista m, String matricula){
-        super(velocidade,custo,p,m,matricula);
+public Carro(double velocidade, double custo, Posicao p, Motorista m, String matricula, double factor){
+        super(velocidade,custo,p,m,matricula,factor);
 }
 
 public Carro(){
@@ -18,7 +18,7 @@ public Carro(){
 }
 
 public Carro(Carro u){
-    super(u.getVelocidade(),u.getCusto(),u.getP(),u.getMotorista(),u.getMatricula());
+    super(u.getVelocidade(),u.getCusto(),u.getP(),u.getMotorista(),u.getMatricula(),u.getFactor());
 }
 
 public Carro clone(){

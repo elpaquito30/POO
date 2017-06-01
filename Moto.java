@@ -6,8 +6,8 @@
  * @version (número de versão ou data)
  */
 public class Moto extends Viatura {
-public Moto(double velocidade, double custo, Posicao p, Motorista m, String matricula){
-        super(velocidade,custo,p,m,matricula);
+public Moto(double velocidade, double custo, Posicao p, Motorista m, String matricula, double factor){
+        super(velocidade,custo,p,m,matricula,factor);
 }
 
 public Moto(){
@@ -16,7 +16,7 @@ public Moto(){
 }
 
 public Moto(Moto u){
-    super(u.getVelocidade(),u.getCusto(),u.getP(),u.getMotorista(),u.getMatricula());
+    super(u.getVelocidade(),u.getCusto(),u.getP(),u.getMotorista(),u.getMatricula(),u.getFactor());
 }
 
 public Moto clone(){

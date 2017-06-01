@@ -1,14 +1,14 @@
 import java.util.Comparator;
+import java.util.Map;
 import java.io.Serializable;
+import java.lang.Double;
 
 
-public class ComparadorDistancia implements Comparator<Map.Entry<double,Viatura>>{
+public class ComparadorDistancia implements Comparator<Double>{
 
-	public int compare(Map.Entry<double,Viatura> a, Map.Entry<double,Viatura> b){
+	public int compare(Double a, Double b){
 
-		if(a.getKey() == b.getKey()) return 0;
-		if(a.getKey() < b.getKey()) return 1;
-		return -1;
+	return a.compareTo(b);
 
 	}
 }

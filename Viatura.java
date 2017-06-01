@@ -58,15 +58,15 @@ public abstract class Viatura
             return matricula;
         }
         
-        public double getFiabilidade(){
+        public double getFactor(){
             int min=0, max=1;
             return this.getFactorRandomInRange(min, max);
         }
         
         public double getFactorRandomInRange(int min, int max){
             Random r = new Random();
-            setFactor(r.nextDouble((max-min) + 1) + min);
-            return this.factor;
+            setFactor(r.nextInt((max-min) + 1) + min);
+            return (double) this.factor;
         }
         
         public void setVelocidade(double velocidade){
@@ -89,14 +89,14 @@ public abstract class Viatura
             this.matricula = matricula;
         }
         
-<<<<<<< HEAD
+
         public abstract Viatura clone();
         
-=======
+
         public void setFactor(double factor){
             this.factor = factor;
         }
->>>>>>> 78c7affb2c7aee4d0bddc566ae23bff8f65334ab
+
         
         public boolean equals(Object o){
             if(this == o)

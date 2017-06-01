@@ -12,10 +12,11 @@ import java.util.Random;
 public class Motorista extends Utilizador
 {
     private double fiabilidade;
+    private double classificacao;
     private List<Avaliacao> classf;
     private double kms;
-    private boolean disponivel;
-    
+    private boolean disponivel ;
+
     public Motorista(String email, String nome, String password, String morada, String dataDeNascimento, double fiabilidade ,double kms, boolean disponivel){
         super(email,nome,password,morada,dataDeNascimento);
         this.fiabilidade = fiabilidade;
@@ -27,7 +28,7 @@ public class Motorista extends Utilizador
     public Motorista(){
         super();
         this.kms = 0.0;
-        this.disponivel = false;
+        this.disponivel = true;
         this.fiabilidade = 0.0;
         
         
@@ -78,6 +79,14 @@ public class Motorista extends Utilizador
         this.disponivel = disponivel;
     }
     
+    public void calClass(){
+
+        double c = 0;
+        this.classf.stream.mapToDouble(c->c.getAvaliacao()).sum();
+        c=c/this.classf.size();
+        this.classificacao = r;
+
+    }
     public boolean equals(Object o){
        if(this == o)
             return true;
