@@ -11,8 +11,9 @@ public class Viagem
     private double custo;
     private LocalDate datai;
     private LocalDate dataf;
+    private Posicao fim;
 
-public Viagem(Cliente cli, Viatura v, double tempoDeChegada, double distanciaDoCliente, double custo){
+public Viagem(Cliente cli, Viatura v, double tempoDeChegada, double distanciaDoCliente, double custo, Posicao fim){
     this.cli= cli.clone();
     this.v = v.clone();
     this.distancia = distancia;
@@ -22,10 +23,11 @@ public Viagem(Cliente cli, Viatura v, double tempoDeChegada, double distanciaDoC
     this.custo = custo;
     this.datai = LocalDate.now();
     this.dataf = null;
+    this.fim = fim.clone();
 }
 
 public Viagem(){
-    this(new Cliente(),null,0,0,0);
+    this(new Cliente(),null,0,0,0,new Posicao());
 }
 
 public Viagem(Viagem u){
@@ -37,7 +39,12 @@ public Viagem(Viagem u){
     this.duracao=u.getDuracao();
     this.distanciaDoCliente=u.getDistanciaDoCliente();
     this.custo=u.getCusto();
+    this.fim=u.getPosicao();
     
+}
+
+public Posicao getP(){
+    return fim;
 }
 
 public Cliente getCliente(){
@@ -66,6 +73,10 @@ public double getDistanciaDoCliente(){
 
 public double getCusto(){
     return custo;
+}
+
+public void setP(Posicao fim){
+    this.fim = fim;
 }
 
 public void setCli(Cliente cli){
@@ -115,7 +126,7 @@ public double calculaPreco(){
      if ((o==null) || (this.getClass() != o.getClass()))
         return false;
      Viagem m = (Viagem) o;
-     return (this.cli.equals(m.getCliente()) && this.v.equals(m.getViatura()) && this.distancia==(m.getDistancia()) && 
+     return (this.fim.equals(m.getP()) && this.cli.equals(m.getCliente()) && this.v.equals(m.getViatura()) && this.distancia==(m.getDistancia()) && 
              this.tempoDeChegada==(m.getTempoDeChegada())  && this.duracao==(m.getDuracao()) 
              && this.distanciaDoCliente==(m.getDistanciaDoCliente()) && this.custo==(m.getCusto()));
         }
