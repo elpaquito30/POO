@@ -38,13 +38,12 @@ public Utilizador getUtilizador (){
       return 2;
     return 0;
   }
-    
-public void adicionaUti(Utilizador u) throws UtilizadorExistenteException{
-    if(this.utilizadores.containsKey(u.getEmail())) throw new UtilizadorExistenteException("Utilizador já existe");
-    this.utilizadores.put(u.getEmail(),u);
-    
-}
 
+////////////////////////////////////////METODOS////////////////////////////////////////////////////
+
+
+  /** Método que adiciona o utilizador ao TreeMap de Utilizadores
+*/
 public void login(String email, String password) throws PassWordErradaException,SessaoIniciadaException{
     if(userLogin!=null) throw new SessaoIniciadaException("Precisa de Fechar a Sessão");
     if(!this.utilizadores.get(email).getPassword().equals(password)) throw new PassWordErradaException("Password errada");
@@ -55,6 +54,15 @@ public void terminarSessao(){
     this.userLogin = null;
 }
     
+
+/** Método que adiciona o utilizador ao TreeMap de Utilizadores
+*/
+public void adicionaUti(Utilizador u) throws UtilizadorExistenteException{
+    if(this.utilizadores.containsKey(u.getEmail())) throw new UtilizadorExistenteException("Utilizador já existe");
+    this.utilizadores.put(u.getEmail(),u);
+    
+}
+
 
 public void criarViaturaNova(Viatura v) throws ViaturaExistenteException, SemAutorizacaoException{
     if(getTipoUtilizador()!=1)throw new SemAutorizacaoException("Sem autorização para efetuar operação");
@@ -170,8 +178,8 @@ public void classifMotorista(String email, double classi)throws UtilizadorInexis
 
 }
 
-public List<Utilizador> top5Desviados(){
-    TreeMap<Double,Utilizador> desvio = new TreeMap<Double,Utilizador>(new ComparadorDesvio());
+public List<Motorista> top5Desviados(){
+    TreeMap<Double,Motorista> desvio = new TreeMap<Double,Motorista>(new ComparadorDesvio());
  this.utilizadores.values().stream().filter(f -> f instanceof Motorista).map(e->(Motorista) e)
                   .forEach(t->{desvio.put(t.getViagens().stream().mapToDouble(f->f.calDesvio()).sum(),t);});
 return desvio.values().stream().limit(5).collect(Collectors.toList());
