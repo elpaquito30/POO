@@ -228,9 +228,17 @@ private static void carregarDados(){
       
       LocalDate fim = LocalDate.of(ano_final,mes_final,dia_final);
       
-      System.out.println(ume.fatViatura(inicio,fim,matricu));
+      try{
+          double t = ume.fatViatura(inicio,fim,matricu);
+          System.out.println("Esta viatura faturou: " + t);
+        }
+        catch(SemAutorizacaoException|ViaturaInexistenteException e){
+            System.out.println(e.getMessage());
     }
- 
+    finally{
+        input.close();
+    }
+  }
   
   private static void listaclientesmaisgastam (){
       TreeSet<Cliente> lista = (TreeSet<Cliente>) ume.top10Gastadores(); //funçao q escolhe os 10 melhores clientes
@@ -249,9 +257,23 @@ private static void carregarDados(){
   private static void listaDasViagensRealizadas (){
       Utilizador u = (Utilizador) ume.getUtilizador();
       
-      List<Viagem> lista = (List<Viagem>) ume.viagensEntreDatas(d1,d2); //funçao q lista as viagens realizadas
+      System.out.println("Indique a data inicial: ");
+      int ano_inicial = lerInt("Ano: ");
+      int mes_inicial = lerInt("Mês: ");
+      int dia_inicial = lerInt("Dia: ");
       
+      LocalDate di = LocalDate.of(ano_inicial,mes_inicial,dia_inicial);
+      
+      System.out.println("Indique a data final: ");
+      int ano_final = lerInt("Ano: ");
+      int mes_final = lerInt("Mês: ");
+      int dia_final = lerInt("Dia: ");
+      
+      LocalDate df = LocalDate.of(ano_inicial,mes_inicial,dia_inicial);
+      
+      List<Viagem> lista = (List<Viagem>) ume.viagensEntreDatas(di,df);
       for( Viagem v : lista){
+          
           System.out.println(v.toString());
         }
     }
@@ -275,6 +297,17 @@ private static void carregarDados(){
     }
       
   private static void viagemTerminada (){
+      String matricula;
+      Scanner input = new Scanner(System.in);
+      System.out.println("Indique a matrícula (XX-YY-ZZ) da viatura com que efectuou a viagem: ");
+      matricula = input.nextLine();
+      input.close();
+      try{
+          ume.finalizaViagem(matricula);
+        }
+      catch(SemAutorizacaoException e){
+          System.out.println(e.getMessage());
+        }
     }
   
   private static void criarViaturaNova (){
@@ -371,8 +404,47 @@ private static void carregarDados(){
       
       return new Moto(velocidade,custo,p,m,matricu,0);
     }
+  
+    private static void requisitaViagem(){
+       Scanner input = new Scanner(System.in);
+       double xf,yf;
+       String matricu;
+        
+       System.out.println("Insira o seu destino");
+       System.out.println("X: ");
+       xf = input.nextDouble();
+       System.out.println("Y: ");
+       yf = input.nextDouble();
+       Posicao destino = new Posicao(xf,yf); 
+        
+       System.out.println("Insira a matrícula do Taxi que prefere: \n(Caso não tenha preferência, insira 1)");
+       matricu = input.nextLine();
+        
+       try{
+            umer.solicitaViagem(matricu,destino(xf,yf));
+       }
+       catch(SemAutorizacaoException e){
+            System.out.println(e.getMessage());
+       }
+       finally{
+            input.close();
+       }   
+    }
     
-      private static double lerDouble(String msg){
+    private static void avaliarCondutor (){
+        String email;
+        double avaliacao;
+        Scanner input = new Scanner(System.in);
+        System.out.println("Insira o Email do Motorista que pretende avaliar");
+        email = input.nextLine();
+        avaliacao = lerDouble("Indique uma classificação de 0 a 100");
+        
+        ume.classifMotorista(email,avaliacao);
+        
+        input.close();
+    }
+    
+  private static double lerDouble(String msg){
     Scanner input = new Scanner(System.in);
     double r = 0;
     System.out.println(msg);
@@ -389,7 +461,7 @@ private static void carregarDados(){
     return r;
   }
   
-    private static int lerInt(String msg){
+  private static int lerInt(String msg){
     Scanner input = new Scanner(System.in);
     int r = 0;
 
@@ -407,7 +479,7 @@ private static void carregarDados(){
     return r;
   }
   
-    private static long lerLong(String msg){
+  private static long lerLong(String msg){
     Scanner input = new Scanner(System.in);
     long r = 0;
 
@@ -424,6 +496,8 @@ private static void carregarDados(){
     }
     return r;
   }
+  
+
 }
                                 
                                 

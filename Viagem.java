@@ -145,4 +145,18 @@ public double calDesvio(){
 public Viagem clone(){
     return new Viagem(this);
 }
+
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Cliente: ").append(cli).append("\n");
+            sb.append("Motorista: ").append(v).append("\n");
+            sb.append("Distância: ").append(distancia).append("\n");
+            sb.append("Distância entre o taxista e cliente: ").append(distanciaDoCliente).append("\n");
+            sb.append("Tempo de chegada do taxista ao cliente: ").append(tempoDeChegada).append("\n");
+            sb.append("Duração da viagem: ").append(duracao).append("\n");
+            sb.append("Preço da viagem: ").append(custo).append("\n");
+            sb.append("Final da viagem em: ").append(data).append("\n");
+            sb.append("Posição final: ").append(fim).append("\n");
+            return sb.toString();
+        }
 }
