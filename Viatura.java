@@ -1,4 +1,5 @@
 import  java.util.Random;
+import java.io.Serializable;
 
 /**
  * Classe abstrata Viatura - escreva a descrição da classe aqui
@@ -6,7 +7,7 @@ import  java.util.Random;
  * @author (seu nome aqui)
  * @version (versão ou data)
  */
-public abstract class Viatura
+public abstract class Viatura implements Serializable
 {
     private double velocidade;
     private double custo;

@@ -1,4 +1,5 @@
-public class Avaliacao {
+import java.io.Serializable;
+public class Avaliacao implements Serializable{
     private int avaliacao;
     
     public Avaliacao(int avaliacao){

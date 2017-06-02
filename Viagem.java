@@ -1,6 +1,7 @@
 import java.time.LocalDate;
+import java.io.Serializable;
 
-public class Viagem
+public class Viagem implements Serializable 
 {
     private Cliente cli;
     private Viatura v;
@@ -110,8 +111,6 @@ public void setCusto(double custo){
     this.custo = custo;
 }
 
-
-
 public double calculaPreco(){
     double tempoEstimado = this.distancia/this.v.getVelocidade();
     double tempoReal = tempoEstimado * (this.v.getFactor());
@@ -122,6 +121,13 @@ public double calculaPreco(){
     }
     else return precoCombinado;
     
+}
+
+public double calDesvio(){
+   double tempoEstimado = this.distancia/this.v.getVelocidade();
+   double precoCombinado = (this.distancia + tempoEstimado) * this.v.getCusto();
+    return (precoCombinado - this.custo);
+
 }
 
 

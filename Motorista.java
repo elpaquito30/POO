@@ -2,14 +2,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Random;
-
+import java.io.Serializable;
 /**
  * Escreva a descrição da classe Motorista aqui.
  * 
  * @author (seu nome) 
  * @version (número de versão ou data)
  */
-public class Motorista extends Utilizador
+public class Motorista extends Utilizador implements Serializable
 {
     private double fiabilidade;
     private double classificacao;

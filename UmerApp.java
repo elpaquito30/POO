@@ -1,6 +1,6 @@
 import java.io.*;
 import java.util.*;
-public class UmerApp {
+public class UmerApp  {
     private UmerApp () {}
     private static Umer ume;
     private static Menu menumain, menumotoristas, menuclientes, menuregistar, menuregistarUme;
@@ -79,8 +79,6 @@ public class UmerApp {
             menumain.executa();
             switch(menumain.getOpcao()){
                 case 1: totalfaturadoviatura();
-                        break;
-                case 2: totalfaturadoimpresa();
                         break;
                 case 3: listaclientesmaisgastam();
                         break;

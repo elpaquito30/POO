@@ -1,13 +1,7 @@
-
-/**
- * Escreva a descrição da classe Ponto aqui.
- * 
- * @author (seu nome) 
- * @version (número de versão ou data)
- */
+import java.io.Serializable;
 import static java.lang.Math.abs ;
 
-public class Posicao
+public class Posicao implements Serializable
 {
     private double x , y ;
     
