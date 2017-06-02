@@ -63,7 +63,8 @@ public void adicionaUti(Utilizador u) throws UtilizadorExistenteException{
     
 }
 
-
+/** Método que adiciona uma Viatura ao Treemap de Taxis 
+*/
 public void criarViaturaNova(Viatura v) throws ViaturaExistenteException, SemAutorizacaoException{
     if(getTipoUtilizador()!=1)throw new SemAutorizacaoException("Sem autorização para efetuar operação");
     if(this.taxis.containsKey(v.getMatricula())) throw new ViaturaExistenteException("Viatura dada já existe");
@@ -71,11 +72,16 @@ public void criarViaturaNova(Viatura v) throws ViaturaExistenteException, SemAut
     
 }
 
+/**Método que associa um Motorista a uma dada viatura
+*/
 public void associaViatura(Motorista m, String matricula){
 
     this.taxis.get(matricula).setM(m);
  
 }
+
+/**Método que solicita uma Viagem. O Cliente pode solicitar a viagem dando a matricula do taxi a ser solicitado e a posição final desta, ou apenas inserir a posição e será-lhe atribuido o taxi mais proximo consoante a Posição do Cliente
+*/
 
 public Viagem soliciViagem(String matricula,Posicao fin) throws SemAutorizacaoException{  
 Cliente c = (Cliente) this.userLogin; 
@@ -84,7 +90,7 @@ Viatura v = null;
 Viatura taxi = null;
     if(getTipoUtilizador()==2){
     //ver se a matricula dada existe no map de taxis
-    if(this.taxis.containsKey(matricula)){
+    if(matricula!=null && this.taxis.containsKey(matricula)){
         //vai ao map de taxis buscar a viatura com a matricula correspondente
             v = this.taxis.get(matricula);
             //Criar a viagem
@@ -108,12 +114,15 @@ return novo;
     }else throw new SemAutorizacaoException("Nao tem autorização para concluir operação");
 }
     
-
+/**Método auxiliar que calcula o tempo que o Motorista demora a chegar há posição do Cliente
+*/
 private double tempoDeChegada(Viatura v){
    Cliente c = (Cliente) this.userLogin;
    return c.getP().distancia(v.getP())/v.getVelocidade();
 }
 
+/**Método auxiliar que retorna o taxi mais proximo em relação ao Cliente
+*/
 private Viatura viaturaProx(){
     Cliente c = (Cliente) this.userLogin;
     TreeMap<Double,Viatura> v = new TreeMap<Double,Viatura>(new ComparadorDistancia());
@@ -125,6 +134,25 @@ private Viatura viaturaProx(){
 
 }
 
+/**Método que 
+*/
+public void finalizaViagem(String matricula){
+
+    if(getTipoUtilizador()==1){
+    Motorista m = (Motorista) userLogin;
+    int tamanho = this.utilizadores.get(m.getEmail()).getViagens().size()-1;
+    Viagem v = this.utilizadores.get(m.getEmail()).getViagens().get(tamanho);
+    Cliente c = this.utilizadores.get(m.getEmail()).getViagens().get(tamanho).getCliente();
+    Posicao f = this.utilizadores.get(m.getEmail()).getViagens().get(tamanho).getP();
+    c.setPosicao(f);
+    v.getViatura().setP(f);
+    v.getViatura().getMotorista().setDisponivel(true);
+}
+}
+
+
+/**Método que retorna os 10 Clientes mais gastadores
+*/
 public List<Cliente> top10Gastadores(){
    TreeMap<Double,Cliente> v = new TreeMap<Double,Cliente>(new ComparadorCusto());
     this.utilizadores.values().stream().filter(f -> f instanceof Cliente).map(e->(Cliente) e).forEach(t->{v.put((custoCliente(t)),t);});
@@ -132,14 +160,7 @@ public List<Cliente> top10Gastadores(){
 
 }
 
-public void finalizaViagem(){
-    Cliente c = (Cliente) this.userLogin;
-    int tamanho = this.utilizadores.get(c.getEmail()).getViagens().size()-1;
-    Viagem v = this.utilizadores.get(c.getEmail()).getViagens().get(tamanho);
-    c.setPosicao(v.getP());
-    v.getViatura().setP(v.getP());
-    v.getViatura().getMotorista().setDisponivel(true);
-}
+
 
 public double fatViatura(LocalDate d1, LocalDate d2,String matricula)throws ViaturaInexistenteException {
         
