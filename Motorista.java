@@ -16,7 +16,7 @@ public class Motorista extends Utilizador implements Serializable
     private List<Avaliacao> classf;
     private double kms;
     private boolean disponivel ;
-
+    
     public Motorista(String email, String nome, String password, String morada, String dataDeNascimento, double fiabilidade ,double kms, boolean disponivel){
         super(email,nome,password,morada,dataDeNascimento);
         this.fiabilidade = fiabilidade;
