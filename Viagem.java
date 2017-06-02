@@ -70,6 +70,7 @@ public double getDistanciaDoCliente(){
 
 public double getCusto(){
     return custo;
+    
 }
 
 public LocalDate getData(){

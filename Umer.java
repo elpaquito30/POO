@@ -2,7 +2,7 @@ import java.util.TreeMap;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
-
+import java.util.stream.Collectors;
 
 
 public class Umer{
@@ -17,24 +17,21 @@ public Umer(){
     this.userLogin = null;
 }
 
-    
-    /** 
-     * Verifica se o utilizador que está actualmente no sistema é um Cliente.
-     */
-public boolean temCli(){
-        if(this.userLogin== null) return false;
-        if(this.userLogin instanceof Cliente) return true;
-        else return false;
-    }
-    
-    /** 
-     * Verifica se o utilizador que está actualmente no sistema é um Motorista.
-     */
-public boolean temMot(){
-        if(this.userLogin== null) return false;
-        if(this.userLogin instanceof Motorista) return true;
-        else return false;
-    }
+public Utilizador getUtilizador (){
+    return userLogin;
+  }
+
+  public void setUtilizador(Utilizador utilizador){
+    this.userLogin= utilizador;
+  }
+
+ public int getTipoUtilizador(){
+    if (this.userLogin instanceof Motorista)
+      return 1;
+    if (this.userLogin instanceof Cliente)
+      return 2;
+    return 0;
+  }
     
 
 
@@ -56,7 +53,7 @@ public void fechaSessao(){
     
 
 public void insereViatura(Viatura v) throws ViaturaExistenteException, SemAutorizacaoException{
-    if(temMot()==false)throw new SemAutorizacaoException("Sem autorização para efetuar operação");
+    if(getTipoUtilizador()!=1)throw new SemAutorizacaoException("Sem autorização para efetuar operação");
     if(this.taxis.containsKey(v.getMatricula())) throw new ViaturaExistenteException("Viatura dada já existe");
     this.taxis.put(v.getMatricula(),v);
     
@@ -113,12 +110,22 @@ private Viatura viaturaProx(){
   return v.get(v.firstKey());
 
 }
-public TreeMap<Double,Cliente> lista(){
-    TreeMap<Double,Cliente> v = new TreeMap<Double,Cliente>(new ComparadorCusto());
-    this.utilizadores.values().stream().limit(10).filter(f -> f instanceof Cliente).map(e->(Cliente) e).forEach(t->{v.put((custoCliente(t)),t);});
-    return v;
+public List<Cliente> top10Gastadores(){
+   TreeMap<Double,Cliente> v = new TreeMap<Double,Cliente>(new ComparadorCusto());
+    this.utilizadores.values().stream().filter(f -> f instanceof Cliente).map(e->(Cliente) e).forEach(t->{v.put((custoCliente(t)),t);});
+    return v.values().stream().limit(10).collect(Collectors.toList());
+
 }
 
+public double fatViatura(LocalDate d1, LocalDate d2,String matricula)throws ViaturaInexistenteException {
+        if(this.taxis.containsKey(matricula)) {
+
+    return this.taxis.get(matricula).getMotorista().getViagens().stream()
+                                .filter(f-> d1.isBefore(f.getData()) && f.getData().isAfter(d2))
+                                .mapToDouble(i->i.getCusto()).sum();
+
+            }else throw new ViaturaInexistenteException("Viatura não existe");
+}
 
 public double custoCliente(Cliente c){
     return c.getViagens().stream().mapToDouble(v->v.getCusto()).sum();

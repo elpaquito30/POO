@@ -12,6 +12,7 @@ import java.util.List;
 public class Cliente extends Utilizador
 {
     private Posicao p;
+
     
   public Cliente(){
     super();
@@ -20,6 +21,7 @@ public class Cliente extends Utilizador
   
   public Cliente(Posicao p, String email, String nome, String password, String morada, String dataDeNascimento){
     super(email, nome, password, morada, dataDeNascimento);
+
     this.p = p.clone();
   }
   
@@ -35,6 +37,7 @@ public class Cliente extends Utilizador
   public void setPosicao(Posicao p){
       this.p = p.clone();
   }
+
     
  public boolean equals(Object o) {
         if (this == o)
