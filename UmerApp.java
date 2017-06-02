@@ -1,11 +1,9 @@
 import java.io.*;
 import java.util.*;
-<<<<<<< HEAD
 import java.time.LocalDate;
-public class UmerApp {
-=======
+
 public class UmerApp  {
->>>>>>> be631f7bd1ffb85dbe2edf7bae1f93556498e702
+
     private UmerApp () {}
     private static Umer ume;
     private static Menu menumain, menumotoristas, menuclientes, menuregistar, menuregistarUme;
@@ -80,15 +78,11 @@ public class UmerApp  {
             switch(menumain.getOpcao()){
                 case 1: totalFaturadoViatura();
                         break;
-<<<<<<< HEAD
                 case 2: listaclientesmaisgastam();
                         break;
-                case 3: listamotoristasmaisdesvios();
-=======
-                case 3: listaclientesmaisgastam();
->>>>>>> be631f7bd1ffb85dbe2edf7bae1f93556498e702
+                case 3: listaMotoristasMaisDesvios();
                         break;
-                case 4: listadasviagensrealizadas();
+                case 4: listaDasViagensRealizadas();
                         break;
                 case 5: associarviatura();
                         break;
@@ -96,7 +90,7 @@ public class UmerApp  {
                         break;
                 case 7: viagemTerminada();
                         break;
-                case 8: ume.terminarsessao();
+                case 8: ume.terminarSessao();
                         break;
             }
         } while (menumain.getOpcao()!= 0);
@@ -112,11 +106,11 @@ public class UmerApp  {
                         break;
                 case 3: listadasviagensrealizadas();
                         break;
-                case 4: solicitarviagem();
+                case 4: solicitarViagem();
                         break;
-                case 5: avaliarcondutor();
+                case 5: avaliarCondutor();
                         break;
-                case 6: ume.terminarsessao();
+                case 6: ume.terminarSessao();
                         break;
             }
         } while (menumain.getOpcao()!= 0);
@@ -245,14 +239,14 @@ private static void carregarDados(){
         }
     }
   
-  private static void listamotoristasmaisdesvios (){
-      TreeSet<Motorista> lista = (TreeSet<Motorista>) ume.maisDesvios(); //funçao q escolhe os 5 piores motoristas
+  private static void listaMotoristasMaisDesvios (){
+      List<Motorista> lista = (List<Motorista>) ume.top5Desviados(); //funçao q escolhe os 5 piores motoristas
       for(Motorista ume : lista){
           System.out.println(ume.getNome());
         }
     }
     
-  private static void listadasviagensrealizadas (){
+  private static void listaDasViagensRealizadas (){
       Utilizador u = (Utilizador) ume.getUtilizador();
       
       List<Viagem> lista = (List<Viagem>) ume.viagensEntreDatas(d1,d2); //funçao q lista as viagens realizadas
