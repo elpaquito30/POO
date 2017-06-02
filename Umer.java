@@ -141,12 +141,12 @@ public List<Viagem> viagensEntreDatas(LocalDate d1, LocalDate d2){
         return viagem;
   }       
 
-public void classifMotorista(String email, double classi)throws UtilizadorEnexistenteException{
+public void classifMotorista(String email, double classi)throws UtilizadorInexistenteException{
     
     if(this.utilizadores.containsKey(email)){
         Motorista m = (Motorista) this.utilizadores.get(email);
         m.calcClassf();
-}else throw new UtilizadorEnexistenteException("Utilizador enexistente");
+}else throw new UtilizadorInexistenteException("Utilizador enexistente");
  
 
 
