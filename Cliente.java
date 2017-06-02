@@ -1,4 +1,4 @@
-
+import java.io.Serializable;
 /**
  * Escreva a descrição da classe Cliente aqui.
  * 
@@ -9,7 +9,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cliente extends Utilizador
+public class Cliente extends Utilizador implements Serializable
 {
     private Posicao p;
 

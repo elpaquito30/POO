@@ -3,13 +3,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Random;
 import java.time.LocalDate;
+import java.io.Serializable;
 /**
  * Classe abstrata Utilizador - escreva a descrição da classe aqui
  * 
  * @author (seu nome aqui)
  * @version (versão ou data)
  */
-public abstract class Utilizador
+public abstract class Utilizador implements Serializable
 {
   private String email, nome, password, morada, dataDeNascimento;
   private List<Viagem> viagens;

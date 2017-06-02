@@ -1,4 +1,4 @@
-
+import java.io.Serializable;
 /**
  * Escreva a descrição da classe Carro aqui.
  * 
@@ -6,7 +6,7 @@
  * @version (número de versão ou data)
  */
 
-public class Carro extends Viatura {
+public class Carro extends Viatura implements Serializable {
     
 public Carro(double velocidade, double custo, Posicao p, Motorista m, String matricula, double factor){
         super(velocidade,custo,p,m,matricula,factor);

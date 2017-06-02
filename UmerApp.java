@@ -1,7 +1,11 @@
 import java.io.*;
 import java.util.*;
+<<<<<<< HEAD
 import java.time.LocalDate;
 public class UmerApp {
+=======
+public class UmerApp  {
+>>>>>>> be631f7bd1ffb85dbe2edf7bae1f93556498e702
     private UmerApp () {}
     private static Umer ume;
     private static Menu menumain, menumotoristas, menuclientes, menuregistar, menuregistarUme;
@@ -76,9 +80,13 @@ public class UmerApp {
             switch(menumain.getOpcao()){
                 case 1: totalFaturadoViatura();
                         break;
+<<<<<<< HEAD
                 case 2: listaclientesmaisgastam();
                         break;
                 case 3: listamotoristasmaisdesvios();
+=======
+                case 3: listaclientesmaisgastam();
+>>>>>>> be631f7bd1ffb85dbe2edf7bae1f93556498e702
                         break;
                 case 4: listadasviagensrealizadas();
                         break;

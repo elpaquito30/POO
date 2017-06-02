@@ -1,11 +1,11 @@
-
+import java.io.Serializable;
 /**
  * Escreva a descrição da classe Moto aqui.
  * 
  * @author (seu nome) 
  * @version (número de versão ou data)
  */
-public class Moto extends Viatura {
+public class Moto extends Viatura implements Serializable {
 public Moto(double velocidade, double custo, Posicao p, Motorista m, String matricula, double factor){
         super(velocidade,custo,p,m,matricula,factor);
 }
