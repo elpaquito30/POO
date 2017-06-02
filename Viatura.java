@@ -59,13 +59,12 @@ public abstract class Viatura
         }
         
         public double getFactor(){
-            int min=0, max=1;
-            return this.getFactorRandomInRange(min, max);
+            return this.getFactorRandomInRange();
         }
         
-        public double getFactorRandomInRange(int min, int max){
+        public double getFactorRandomInRange(){
             Random r = new Random();
-            setFactor(r.nextInt((max-min) + 1) + min);
+            setFactor(r.nextDouble());
             return (double) this.factor;
         }
         
