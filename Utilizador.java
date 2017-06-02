@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Random;
+import java.time.LocalDate;
 /**
  * Classe abstrata Utilizador - escreva a descrição da classe aqui
  * 
@@ -57,13 +58,12 @@ public abstract class Utilizador
       return dataDeNascimento;
     }
     
-   public ArrayList<Viagem> getViagens(){
-        return this.viagens.stream()
-                          .map(Viagem::clone)
-                          .collect(Collectors.toCollection(ArrayList::new));
-    }
-    
-    
+   public List<Viagem> getViagens(){
+       return this.viagens.stream().map(e->e.clone()).collect(Collectors.toList());
+}
+
+                                                         
+
    public void setEmail(String email){
       this.email = email;
     }

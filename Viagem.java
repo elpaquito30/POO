@@ -9,8 +9,7 @@ public class Viagem
     private double duracao;
     private double distanciaDoCliente; 
     private double custo;
-    private LocalDate datai;
-    private LocalDate dataf;
+    private LocalDate data;
     private Posicao fim;
 
 public Viagem(Cliente cli, Viatura v, double tempoDeChegada,double distancia, double distanciaDoCliente,Posicao fim){
@@ -20,10 +19,8 @@ public Viagem(Cliente cli, Viatura v, double tempoDeChegada,double distancia, do
     this.tempoDeChegada = tempoDeChegada;
     this.duracao = duracao;
     this.distanciaDoCliente = distanciaDoCliente;
-    this.custo = custo;
-    this.datai = LocalDate.now();
-    this.dataf = null;
-    this.fim = fim.clone();
+    this.custo = this.calculaPreco();
+    this.data =LocalDate.now();
 }
 
 public Viagem(){
@@ -75,6 +72,11 @@ public double getCusto(){
     return custo;
 }
 
+public LocalDate getData(){
+
+    return data;
+}
+
 public void setP(Posicao fim){
     this.fim = fim;
 }
@@ -106,6 +108,8 @@ public void setDistanciaDoCliente(double distanciaDoCliente){
 public void setCusto(double custo){
     this.custo = custo;
 }
+
+
 
 public double calculaPreco(){
     double tempoEstimado = this.distancia/this.v.getVelocidade();

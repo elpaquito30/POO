@@ -1,4 +1,9 @@
 import java.util.TreeMap;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.ArrayList;
+
+
 
 public class Umer{
    
@@ -57,6 +62,12 @@ public void insereViatura(Viatura v) throws ViaturaExistenteException, SemAutori
     
 }
 
+public void associaViatura(Motorista m, String matricula){
+
+    this.taxis.get(matricula).setM(m);
+
+}
+
 public Viagem soliciViagem(String matricula,Posicao fin){  
 Cliente c = (Cliente) this.userLogin; 
 Viagem novo;
@@ -102,12 +113,40 @@ private Viatura viaturaProx(){
   return v.get(v.firstKey());
 
 }
+public TreeMap<Double,Cliente> lista(){
+    TreeMap<Double,Cliente> v = new TreeMap<Double,Cliente>(new ComparadorCusto());
+    this.utilizadores.values().stream().limit(10).filter(f -> f instanceof Cliente).map(e->(Cliente) e).forEach(t->{v.put((custoCliente(t)),t);});
+    return v;
+}
 
 
-//public double classifMotorista(Utilizador u, double classi){
+public double custoCliente(Cliente c){
+    return c.getViagens().stream().mapToDouble(v->v.getCusto()).sum();
+}
+
+public List<Viagem> viagensEntreDatas(LocalDate d1, LocalDate d2){
+  
+        ArrayList<Viagem> viagem = new ArrayList<Viagem>();
+
+        this.utilizadores.get(userLogin.getEmail()).getViagens().stream().filter(f-> d1.isBefore(f.getData()) && f.getData().isAfter(d2))
+                                                                          .forEach(t-> {viagem.add(t);});
+
+        return viagem;
+  }       
+
+public void classifMotorista(String email, double classi)throws UtilizadorEnexistenteException{
+    
+    if(this.utilizadores.containsKey(email)){
+        Motorista m = (Motorista) this.utilizadores.get(email);
+        m.calcClassf();
+}else throw new UtilizadorEnexistenteException("Utilizador enexistente");
+ 
+
 
 }
 
+
+
  
     
-
+}

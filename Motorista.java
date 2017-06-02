@@ -33,6 +33,11 @@ public class Motorista extends Utilizador
         
         
     }
+
+      public List<Avaliacao> getClassf(){
+       return this.classf.stream().map(c-> c.clone()).collect(Collectors.toList());
+    }
+    
     
     public Motorista(Motorista u){
         this.fiabilidade = u.getFiabilidade();
@@ -45,13 +50,7 @@ public class Motorista extends Utilizador
         return fiabilidade;
     }
         
-    public ArrayList<Avaliacao> getClassf(){
-       return this.classf.stream()
-       .map(c-> c.clone())
-       .collect(Collectors.toCollection(ArrayList::new));
-    }
-    
-
+  
     public double getKms(){
         return kms;
     }
@@ -79,7 +78,7 @@ public class Motorista extends Utilizador
         this.disponivel = disponivel;
     }
     
-    public void calClass(){
+    public void calcClassf(){
 
         double c = 0;
         this.classf.stream().mapToDouble(f->f.getAvaliacao()).sum();
