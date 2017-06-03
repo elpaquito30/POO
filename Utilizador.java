@@ -60,7 +60,7 @@ public abstract class Utilizador implements Serializable
     }
     
    public List<Viagem> getViagens(){
-       return this.viagens.stream().map(e->e.clone()).collect(Collectors.toList());
+       return this.viagens;
 }
 
                                                          

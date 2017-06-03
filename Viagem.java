@@ -22,6 +22,7 @@ public Viagem(Cliente cli, Viatura v, double tempoDeChegada,double distancia, do
     this.distanciaDoCliente = distanciaDoCliente;
     this.custo = this.calculaPreco();
     this.data =LocalDate.now();
+    this.fim = fim;
 }
 
 public Viagem(){

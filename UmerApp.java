@@ -243,15 +243,15 @@ private static void carregarDados(){
   
   private static void listaclientesmaisgastam (){
       ArrayList<Cliente> lista = (ArrayList<Cliente>) ume.top10Gastadores(); //funçao q escolhe os 10 melhores clientes
-      for(Cliente ume : lista){
-          System.out.println(ume.getNome());
+      for(Cliente cli : lista){
+          System.out.println(cli.getNome());
         }
     }
   
   private static void listaMotoristasMaisDesvios (){
       List<Motorista> lista = (List<Motorista>) ume.top5Desviados(); //funçao q escolhe os 5 piores motoristas
-      for(Motorista ume : lista){
-          System.out.println(ume.getNome());
+      for(Motorista mot : lista){
+          System.out.println(mot.getNome());
         }
     }
     
@@ -270,7 +270,7 @@ private static void carregarDados(){
       int mes_final = lerInt("Mês: ");
       int dia_final = lerInt("Dia: ");
       
-      LocalDate df = LocalDate.of(ano_inicial,mes_inicial,dia_inicial);
+      LocalDate df = LocalDate.of(ano_final,mes_final,dia_final);
       
       List<Viagem> lista = (List<Viagem>) ume.viagensEntreDatas(di,df);
       for( Viagem v : lista){
@@ -293,6 +293,7 @@ private static void carregarDados(){
           System.out.println(e.getMessage());
         }
       finally{
+          System.out.println("Associação completada com sucesso");
           input.close();
         }
     }
@@ -352,7 +353,7 @@ private static void carregarDados(){
  
       p = new Posicao(x,y);
       
-      return new Moto(velocidade,custo,p,m,matricu,0);
+      return new Carro(velocidade,custo,p,m,matricu,0);
     }
     
     private static Viatura addCarrinha(){
@@ -376,7 +377,7 @@ private static void carregarDados(){
  
       p = new Posicao(x,y);
       
-      return new Moto(velocidade,custo,p,m,matricu,0);
+      return new Carrinha(velocidade,custo,p,m,matricu,0);
     }
     
     private static Viatura addMoto(){
@@ -408,16 +409,14 @@ private static void carregarDados(){
        double xf,yf;
        String matricu;
         
+       System.out.println("Insira a matrícula do Taxi que prefere: \n(Caso não tenha preferência, insira 1)");
+       matricu = input.nextLine(); 
        System.out.println("Insira o seu destino");
        System.out.println("X: ");
        xf = input.nextDouble();
        System.out.println("Y: ");
        yf = input.nextDouble();
-       Posicao destino = new Posicao(xf,yf); 
-        
-       System.out.println("Insira a matrícula do Taxi que prefere: \n(Caso não tenha preferência, insira 1)");
-       matricu = input.nextLine();
-        
+       Posicao destino = new Posicao(xf,yf);
 
             ume.soliciViagem(matricu,destino);
        

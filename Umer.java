@@ -88,31 +88,37 @@ public void associaViatura(Motorista m, String matricula) throws ViaturaInexiste
 public Viagem soliciViagem(String matricula,Posicao fin){
 Cliente c = (Cliente) this.userLogin; 
 Viagem novo;
-Viatura v = null;
 Viatura taxi = null;
+
     //ver se a matricula dada existe no map de taxis
 boolean aux = this.taxis.containsKey(matricula);
-    if(aux){
+    if(matricula != "1" && aux){
         //vai ao map de taxis buscar a viatura com a matricula correspondente
-            v = this.taxis.get(matricula);
+            taxi = this.taxis.get(matricula);
+            double r = tempoDeChegada(taxi);
+            double d = c.getP().distancia(fin);
             //Criar a viagem
-           novo = new Viagem(c, v , tempoDeChegada(v), c.getP().distancia(fin),c.getP().distancia(v.getP()), fin);
+           novo = new Viagem(c, taxi , r, d,c.getP().distancia(taxi.getP()), fin);
             
         }
 
     else{
-        if(matricula.equals("")){
-            System.out.println("Não encotrou viatura, será-lhe a viatura mais Proxima");
-        }
 
-        taxi = this.viaturaProx();
-        novo = new Viagem(c, taxi , c.getP().distancia(fin), tempoDeChegada(taxi), c.getP().distancia(v.getP() ),fin);
-            
+        taxi = viaturaProx();
+        double r = tempoDeChegada(taxi);
+        Posicao p = c.getP();
+         double d = c.getP().distancia(fin);
+       
+
+        novo = new Viagem(c, taxi ,d, r, c.getP().distancia(taxi.getP()),fin);   
+        System.out.println(taxi.getMatricula());
+
     }
    
     this.utilizadores.get(c.getEmail()).getViagens().add(novo);
+
     
-    Motorista m = (Motorista) this.taxis.get(matricula).getMotorista();
+    Motorista m = taxi.getMotorista();
     m.getViagens().add(novo);
     m.setDisponivel(false);
     
@@ -153,6 +159,7 @@ public void finalizaViagem(String matricula){
     c.setPosicao(f);
     v.getViatura().setP(f);
     v.getViatura().getMotorista().setDisponivel(true);
+    System.out.println("Viagem Terminada");
 }
 }
 
@@ -195,7 +202,7 @@ public List<Viagem> viagensEntreDatas(LocalDate d1, LocalDate d2){
   
         ArrayList<Viagem> viagem = new ArrayList<Viagem>();
 
-        this.utilizadores.get(userLogin.getEmail()).getViagens().stream().filter(f-> d1.isBefore(f.getData()) && f.getData().isAfter(d2))
+        this.utilizadores.get(userLogin.getEmail()).getViagens().stream().filter(f-> d1.isBefore(f.getData()) && d2.isAfter( f.getData()))
                                                                           .forEach(t-> {viagem.add(t);});
 
         return viagem;
@@ -231,10 +238,10 @@ public void gravar() throws IOException {
 public static Umer initApp() throws IOException, ClassNotFoundException {
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream("umer.data"));
       
-        Umer imo = (Umer) ois.readObject();
+        Umer ume = (Umer) ois.readObject();
         
         ois.close();
-        return imo;
+        return ume;
     }
 
 

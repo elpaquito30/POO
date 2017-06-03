@@ -30,12 +30,13 @@ public class Motorista extends Utilizador implements Serializable
         this.kms = 0.0;
         this.disponivel = true;
         this.fiabilidade = 0.0;
+        this.classf = new ArrayList<Avaliacao>();
         
         
     }
 
       public List<Avaliacao> getClassf(){
-       return this.classf.stream().map(c-> c.clone()).collect(Collectors.toList());
+       return this.classf;
     }
     
     
@@ -64,9 +65,7 @@ public class Motorista extends Utilizador implements Serializable
     }
     
     public void setClassf(List<Avaliacao> classf){
-        this.classf = classf.stream()
-                      .map(Avaliacao::clone)
-                      .collect(Collectors.toList());
+        this.classf = classf;
     }
    
     

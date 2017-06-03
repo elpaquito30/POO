@@ -22,7 +22,7 @@ public class Cliente extends Utilizador implements Serializable
   public Cliente(Posicao p, String email, String nome, String password, String morada, String dataDeNascimento){
     super(email, nome, password, morada, dataDeNascimento);
 
-    this.p = p.clone();
+    this.p = new Posicao();
   }
   
   public Cliente (Cliente c){

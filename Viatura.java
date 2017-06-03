@@ -19,8 +19,8 @@ public abstract class Viatura implements Serializable
         public Viatura(double velocidade, double custo, Posicao p, Motorista m, String matricula, double factor){
             this.velocidade = velocidade;
             this.custo = custo;
-            this.p = p.clone();
-            this.m = m.clone();
+            this.p = p;
+            this.m = m;
             this.matricula = matricula;
             this.factor = factor;
         }
