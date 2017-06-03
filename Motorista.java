@@ -20,7 +20,7 @@ public class Motorista extends Utilizador implements Serializable
     public Motorista(String email, String nome, String password, String morada, String dataDeNascimento, double fiabilidade ,double kms, boolean disponivel){
         super(email,nome,password,morada,dataDeNascimento);
         this.fiabilidade = fiabilidade;
-        this.setClassf(classf);
+        this.classf = new ArrayList<Avaliacao>();
         this.kms = kms;
         this.disponivel = disponivel; 
     }

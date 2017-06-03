@@ -1,6 +1,6 @@
 
-public class SemAutorizacaoException extends Exception
-{
+public class SemAutorizacaoException extends Exception{
+	
 	 public SemAutorizacaoException(){
       super();
    }

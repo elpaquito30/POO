@@ -20,7 +20,7 @@ public class UmerApp  {
     }
  }
 
-    public static void carregarMenus(){
+   private static void carregarMenus(){
         String [] principal = {
                                "Iniciar sessão",
                                "Registar Utilizador"
@@ -74,8 +74,8 @@ public class UmerApp  {
     
         private static void imprimeMenuMotorista(){
         do{
-            menumain.executa();
-            switch(menumain.getOpcao()){
+            menumotoristas.executa();
+            switch(menumotoristas.getOpcao()){
                 case 1: totalFaturadoViatura();
                         break;
                 case 2: listaclientesmaisgastam();
@@ -93,27 +93,27 @@ public class UmerApp  {
                 case 8: ume.terminarSessao();
                         break;
             }
-        } while (menumain.getOpcao()!= 0);
+        } while (menumotoristas.getOpcao()!= 0);
     }
     
             private static void imprimeMenuCliente(){
         do{
-            menumain.executa();
-            switch(menumain.getOpcao()){
+            menuclientes.executa();
+            switch(menuclientes.getOpcao()){
                 case 1: listaclientesmaisgastam();
                         break;
-                case 2: listamotoristasmaisdesvios();
+                case 2: listaMotoristasMaisDesvios();
                         break;
-                case 3: listadasviagensrealizadas();
+                case 3: listaDasViagensRealizadas();
                         break;
-                case 4: solicitarViagem();
+                case 4: requisitaViagem();
                         break;
                 case 5: avaliarCondutor();
                         break;
                 case 6: ume.terminarSessao();
                         break;
             }
-        } while (menumain.getOpcao()!= 0);
+        } while (menuclientes.getOpcao()!= 0);
     }
     
 
@@ -150,12 +150,13 @@ private static void carregarDados(){
     try{
       ume.login(email,password);
     }
-    catch (SemAutorizacaoException e){
+    catch (PassWordErradaException|UtilizadorInexistenteException|SessaoIniciadaException e){
       System.out.println(e.getMessage());
     }
     finally{
       input.close();
     }
+    System.out.println("Login");
     switch(ume.getTipoUtilizador()){
       case 1: imprimeMenuMotorista(); break;
       case 2: imprimeMenuCliente(); break;
@@ -188,8 +189,8 @@ private static void carregarDados(){
 
     switch(menuregistar.getOpcao()){
       case 0: input.close(); return;
-      case 1: u = new Motorista(); break;
-      case 2: u = new Cliente(); break;
+      case 1: u = new Cliente(); break;
+      case 2: u = new Motorista(); break;
     }
 
     u.setEmail(email);
@@ -232,7 +233,7 @@ private static void carregarDados(){
           double t = ume.fatViatura(inicio,fim,matricu);
           System.out.println("Esta viatura faturou: " + t);
         }
-        catch(SemAutorizacaoException|ViaturaInexistenteException e){
+        catch(ViaturaInexistenteException e){
             System.out.println(e.getMessage());
     }
     finally{
@@ -241,7 +242,7 @@ private static void carregarDados(){
   }
   
   private static void listaclientesmaisgastam (){
-      TreeSet<Cliente> lista = (TreeSet<Cliente>) ume.top10Gastadores(); //funçao q escolhe os 10 melhores clientes
+      ArrayList<Cliente> lista = (ArrayList<Cliente>) ume.top10Gastadores(); //funçao q escolhe os 10 melhores clientes
       for(Cliente ume : lista){
           System.out.println(ume.getNome());
         }
@@ -288,7 +289,7 @@ private static void carregarDados(){
       try{
           ume.associaViatura(m,matricu);
         }
-      catch(ViaturaInexistenteException|SemAutorizacaoException e){
+      catch(ViaturaInexistenteException e){
           System.out.println(e.getMessage());
         }
       finally{
@@ -302,12 +303,9 @@ private static void carregarDados(){
       System.out.println("Indique a matrícula (XX-YY-ZZ) da viatura com que efectuou a viagem: ");
       matricula = input.nextLine();
       input.close();
-      try{
+   
           ume.finalizaViagem(matricula);
-        }
-      catch(SemAutorizacaoException e){
-          System.out.println(e.getMessage());
-        }
+      
     }
   
   private static void criarViaturaNova (){
@@ -325,9 +323,9 @@ private static void carregarDados(){
     }
     
     try {
-        ume.insereViatura(viatura);
+        ume.criarViaturaNova(viatura);
     }
-    catch (ViaturaExistenteException|SemAutorizacaoException e){
+    catch (ViaturaExistenteException e){
         System.out.println(e.getMessage());
         criarViaturaNova();
     }
@@ -420,15 +418,12 @@ private static void carregarDados(){
        System.out.println("Insira a matrícula do Taxi que prefere: \n(Caso não tenha preferência, insira 1)");
        matricu = input.nextLine();
         
-       try{
-            umer.solicitaViagem(matricu,destino(xf,yf));
-       }
-       catch(SemAutorizacaoException e){
-            System.out.println(e.getMessage());
-       }
-       finally{
+
+            ume.soliciViagem(matricu,destino);
+       
+    
             input.close();
-       }   
+       
     }
     
     private static void avaliarCondutor (){
@@ -439,9 +434,15 @@ private static void carregarDados(){
         email = input.nextLine();
         avaliacao = lerDouble("Indique uma classificação de 0 a 100");
         
+        try{
         ume.classifMotorista(email,avaliacao);
-        
-        input.close();
+        }
+        catch(UtilizadorInexistenteException e){
+          System.out.println(e.getMessage());
+        }
+
+        finally{input.close();
+        }
     }
     
   private static double lerDouble(String msg){

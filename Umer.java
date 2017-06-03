@@ -44,8 +44,9 @@ public Utilizador getUtilizador (){
 
   /** Método que adiciona o utilizador ao TreeMap de Utilizadores
 */
-public void login(String email, String password) throws PassWordErradaException,SessaoIniciadaException{
+public void login(String email, String password) throws UtilizadorInexistenteException,PassWordErradaException,SessaoIniciadaException{
     if(userLogin!=null) throw new SessaoIniciadaException("Precisa de Fechar a Sessão");
+    if(this.utilizadores.get(email)==null) throw new UtilizadorInexistenteException("Utilizador Inexistente");
     if(!this.utilizadores.get(email).getPassword().equals(password)) throw new PassWordErradaException("Password errada");
     userLogin = this.utilizadores.get(email);
 }
@@ -65,8 +66,7 @@ public void adicionaUti(Utilizador u) throws UtilizadorExistenteException{
 
 /** Método que adiciona uma Viatura ao Treemap de Taxis 
 */
-public void criarViaturaNova(Viatura v) throws ViaturaExistenteException, SemAutorizacaoException{
-    if(getTipoUtilizador()!=1)throw new SemAutorizacaoException("Sem autorização para efetuar operação");
+public void criarViaturaNova(Viatura v) throws ViaturaExistenteException{
     if(this.taxis.containsKey(v.getMatricula())) throw new ViaturaExistenteException("Viatura dada já existe");
     this.taxis.put(v.getMatricula(),v);
     
@@ -74,23 +74,25 @@ public void criarViaturaNova(Viatura v) throws ViaturaExistenteException, SemAut
 
 /**Método que associa um Motorista a uma dada viatura
 */
-public void associaViatura(Motorista m, String matricula){
+public void associaViatura(Motorista m, String matricula) throws ViaturaInexistenteException{
 
+    if(this.taxis.containsKey(matricula)){
     this.taxis.get(matricula).setM(m);
+}else throw new ViaturaInexistenteException("A viatura não existe");
  
 }
 
 /**Método que solicita uma Viagem. O Cliente pode solicitar a viagem dando a matricula do taxi a ser solicitado e a posição final desta, ou apenas inserir a posição e será-lhe atribuido o taxi mais proximo consoante a Posição do Cliente
 */
 
-public Viagem soliciViagem(String matricula,Posicao fin) throws SemAutorizacaoException{  
+public Viagem soliciViagem(String matricula,Posicao fin){
 Cliente c = (Cliente) this.userLogin; 
 Viagem novo;
 Viatura v = null;
 Viatura taxi = null;
-    if(getTipoUtilizador()==2){
     //ver se a matricula dada existe no map de taxis
-    if(matricula!=null && this.taxis.containsKey(matricula)){
+boolean aux = this.taxis.containsKey(matricula);
+    if(aux){
         //vai ao map de taxis buscar a viatura com a matricula correspondente
             v = this.taxis.get(matricula);
             //Criar a viagem
@@ -99,6 +101,10 @@ Viatura taxi = null;
         }
 
     else{
+        if(matricula.equals("")){
+            System.out.println("Não encotrou viatura, será-lhe a viatura mais Proxima");
+        }
+
         taxi = this.viaturaProx();
         novo = new Viagem(c, taxi , c.getP().distancia(fin), tempoDeChegada(taxi), c.getP().distancia(v.getP() ),fin);
             
@@ -111,8 +117,8 @@ Viatura taxi = null;
     m.setDisponivel(false);
     
 return novo;
-    }else throw new SemAutorizacaoException("Nao tem autorização para concluir operação");
-}
+    }
+
     
 /**Método auxiliar que calcula o tempo que o Motorista demora a chegar há posição do Cliente
 */
@@ -134,7 +140,7 @@ private Viatura viaturaProx(){
 
 }
 
-/**Método que 
+/**Método que termina a Viagem, atualizando as posições tando do taxi como do Cliente
 */
 public void finalizaViagem(String matricula){
 
@@ -151,6 +157,7 @@ public void finalizaViagem(String matricula){
 }
 
 
+
 /**Método que retorna os 10 Clientes mais gastadores
 */
 public List<Cliente> top10Gastadores(){
@@ -160,8 +167,16 @@ public List<Cliente> top10Gastadores(){
 
 }
 
+/**Método auxiliar que calcula quanto um dado Cliente gastou
+*/
+public double custoCliente(Cliente c){
+    return c.getViagens().stream().mapToDouble(v->v.getCusto()).sum();
+}
 
 
+
+/**Método que retorna o total faturado por uma dada viatura, entre datas
+*/
 public double fatViatura(LocalDate d1, LocalDate d2,String matricula)throws ViaturaInexistenteException {
         
 
@@ -173,9 +188,8 @@ public double fatViatura(LocalDate d1, LocalDate d2,String matricula)throws Viat
             }else throw new ViaturaInexistenteException("Viatura não existe");
 }
 
-public double custoCliente(Cliente c){
-    return c.getViagens().stream().mapToDouble(v->v.getCusto()).sum();
-}
+
+
 
 public List<Viagem> viagensEntreDatas(LocalDate d1, LocalDate d2){
   
@@ -187,15 +201,12 @@ public List<Viagem> viagensEntreDatas(LocalDate d1, LocalDate d2){
         return viagem;
   }       
 
-public void classifMotorista(String email, double classi)throws UtilizadorInexistenteException, SemAutorizacaoException{
+public void classifMotorista(String email, double classi)throws UtilizadorInexistenteException{
     
-    if(getTipoUtilizador()==1){
     if(this.utilizadores.containsKey(email)){
         Motorista m = (Motorista) this.utilizadores.get(email);
         m.calcClassf();
 }else throw new UtilizadorInexistenteException("Utilizador enexistente");
-
-}else throw new SemAutorizacaoException("Não tem autorização para efetuar operação");
 
 }
 

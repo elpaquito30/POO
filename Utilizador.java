@@ -21,7 +21,7 @@ public abstract class Utilizador implements Serializable
         this.password = password;
         this.morada = morada;
         this.dataDeNascimento = dataDeNascimento;
-        this.setViagens(viagens);
+        this.viagens = new ArrayList<Viagem>();
     }
     
    public Utilizador(){
