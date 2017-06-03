@@ -32,16 +32,14 @@ public class UmerApp  {
                                 "Lista das viagens realizadas",
                                 "Associar viatura",
                                 "Criar Viatura nova",
-                                "Viagem Terminada",
-                                "Terminar sessão"
+                                "Viagem Terminada"
                             };
         String [] clientes = {
                                 "Lista dos 10 clientes que mais gastam",
                                 "Lista dos 5 motoristas com mais desvios",
                                 "Lista das viagens realizadas",
                                 "Solicitar uma viagem",
-                                "Avaliar o Motorista",
-                                "Terminar sessão"
+                                "Avaliar o Motorista"
                             };
         String [] registar = {
                                 "Registar Cliente",
@@ -90,10 +88,10 @@ public class UmerApp  {
                         break;
                 case 7: viagemTerminada();
                         break;
-                case 8: ume.terminarSessao();
-                        break;
+                 
             }
         } while (menumotoristas.getOpcao()!= 0);
+        if (menumotoristas.getOpcao()== 0) ume.setUtilizador(null);
     }
     
             private static void imprimeMenuCliente(){
@@ -110,10 +108,9 @@ public class UmerApp  {
                         break;
                 case 5: avaliarCondutor();
                         break;
-                case 6: ume.terminarSessao();
-                        break;
             }
         } while (menuclientes.getOpcao()!= 0);
+        if(menuclientes.getOpcao()== 0) ume.setUtilizador(null);
     }
     
 
